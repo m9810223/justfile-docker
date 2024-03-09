@@ -5,7 +5,6 @@ ARG _JUST_VERSION
 ARG _WORKDIR
 ARG _BUILDER
 ARG _RUNNER
-ARG _RUST_JOBS
 
 
 FROM --platform=$TARGETPLATFORM \
@@ -14,7 +13,7 @@ ARG _JUST_VERSION
 ARG _RUST_JOBS
 RUN apk add musl-dev
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
-    cargo install --jobs ${_RUST_JOBS} just@${_JUST_VERSION}
+    cargo install just@${_JUST_VERSION}
 
 
 FROM --platform=$TARGETPLATFORM \

@@ -18,7 +18,6 @@ _JUST_VERSION := "1.14.0"
 _WORKDIR := "/jwd"
 _BUILDER := "docker.io/library/rust:alpine"
 _RUNNER := "docker.io/library/debian:trixie-slim"
-_RUST_JOBS := "1"
 __TAG_PREFIX := "debian-trixie-slim-"
 _TAG := __TAG_PREFIX + "v" + _JUST_VERSION
 _BUILDER_NAME := "just"
@@ -45,7 +44,6 @@ build_and_push:
         --build-arg _WORKDIR={{ _WORKDIR }} \
         --build-arg _BUILDER={{ _BUILDER }} \
         --build-arg _RUNNER={{ _RUNNER }} \
-        --build-arg _RUST_JOBS={{ _RUST_JOBS }} \
         --pull \
         --push \
         --platform {{ _PLATFORM }} \
@@ -59,7 +57,6 @@ build_and_push_latest:
         --build-arg _WORKDIR={{ _WORKDIR }} \
         --build-arg _BUILDER={{ _BUILDER }} \
         --build-arg _RUNNER={{ _RUNNER }} \
-        --build-arg _RUST_JOBS={{ _RUST_JOBS }} \
         --pull \
         --push \
         --platform {{ _PLATFORM }} \
