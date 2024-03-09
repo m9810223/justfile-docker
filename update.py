@@ -3,18 +3,21 @@ import subprocess
 
 
 JUST_VERSIONS = [
-    '1.14.0',
-    '1.13.0',
-    '1.12.0',
+    '1.25.0',
+    '1.24.0',
+    # '1.14.0',
+    # '1.13.0',
+    # '1.12.0',
 ]
 RUNNERS = [
-    'alpine:3.18',
-    'alpine:3.17',
-    'alpine:3.16',
-    'debian:trixie-slim',
-    'debian:bookworm-slim',
-    'debian:bullseye-slim',
-    'debian:buster-slim',
+    'alpine:3.19.1',
+    'alpine:3.18.6',
+    'alpine:3.17.7',
+    'alpine:3.16.9',
+    'debian:trixie-slim', # 13
+    'debian:bookworm-slim',# 12
+    'debian:bullseye-slim', # 11
+    'debian:buster-slim', # 10
     'docker:dind',
     'docker:dind-rootless',
     'docker:git',
