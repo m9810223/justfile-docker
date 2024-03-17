@@ -19,9 +19,12 @@ RUNNERS = [
     'debian:bookworm-slim',# 12
     'debian:bullseye-slim', # 11
     'debian:buster-slim', # 10
-    'docker:dind',
-    'docker:dind-rootless',
-    'docker:git',
+    'docker:25.0.4-dind',
+    'docker:25.0.4-dind-rootless',
+    'docker:25.0.4-git',
+    'docker:24.0.6-dind',
+    'docker:24.0.6-dind-rootless',
+    'docker:24.0.6-git',
 ]
 
 

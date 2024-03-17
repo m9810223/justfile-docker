@@ -43,6 +43,8 @@ docker run --rm -it -v $(pwd):/jwd m9810223/justfile -V
     - [3.17](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=alpine-3.17)
     - [3.16](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=alpine-3.16)
 - [docker](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker)
+    - [25.0.4](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker-25.0.4)
+    - [24.0.6](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker-24.0.6)
     - [dind](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker-dind)
     - [dind-rootless](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker-dind-rootless)
     - [git](https://hub.docker.com/r/m9810223/justfile/tags?page=1&name=docker-git)
