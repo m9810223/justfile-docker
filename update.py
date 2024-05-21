@@ -15,10 +15,10 @@ RUNNERS = [
     'alpine:3.18.6',
     'alpine:3.17.7',
     'alpine:3.16.9',
-    'debian:trixie-slim', # 13
-    'debian:bookworm-slim',# 12
-    'debian:bullseye-slim', # 11
-    'debian:buster-slim', # 10
+    'debian:trixie-slim',  # 13
+    'debian:bookworm-slim',  # 12
+    'debian:bullseye-slim',  # 11
+    'debian:buster-slim',  # 10
     'docker:25.0.4-dind',
     'docker:25.0.4-dind-rootless',
     'docker:25.0.4-git',
