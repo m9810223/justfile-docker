@@ -7,65 +7,29 @@ _default: _fmt
 
 # [docker]
 
-_D := "docker"
-_DOCKERFILE := "Dockerfile"
-_PLATFORM := "linux/amd64,linux/arm64/v8"
-
-# _PLATFORM := "linux/amd64,linux/arm64/v8,linux/386,linux/arm/v7"
-
-_IMAGE_NAME := "docker.io/m9810223/justfile"
-_JUST_VERSION := "1.14.0"
-_WORKDIR := "/jwd"
-_BUILDER := "docker.io/library/rust:alpine"
-_RUNNER := "docker.io/library/debian:trixie-slim"
-__TAG_PREFIX := "debian-trixie-slim-"
-_TAG := __TAG_PREFIX + "v" + _JUST_VERSION
-_BUILDER_NAME := "just"
-_BUILDKITD_CONFIG := "buildkitd.toml"
-
-remove_builder:
-    docker buildx rm {{ _BUILDER_NAME }} -f || true
+DOCKER := "docker"
+BUILDER_NAME := "justfile-docker"
+BUILDER_PLATFORM := "linux/amd64,linux/arm64,linux/arm/v7,linux/386"
 
 create_builder:
-    docker run --privileged --rm tonistiigi/binfmt --install all
-    docker buildx create \
+    {{ DOCKER }}  buildx create \
         --driver docker-container \
-        --config {{ _BUILDKITD_CONFIG }} \
-        --name {{ _BUILDER_NAME }} \
-        --bootstrap \
-        --use \
-        --platform {{ _PLATFORM }} \
+        --name {{ BUILDER_NAME }} \
+        --platform {{ BUILDER_PLATFORM }} \
         || true
 
-build_and_push:
-    {{ _D }} buildx build \
-        -f {{ _DOCKERFILE }} \
-        --build-arg _JUST_VERSION={{ _JUST_VERSION }} \
-        --build-arg _WORKDIR={{ _WORKDIR }} \
-        --build-arg _BUILDER={{ _BUILDER }} \
-        --build-arg _RUNNER={{ _RUNNER }} \
-        --pull \
-        --push \
-        --platform {{ _PLATFORM }} \
-        -t {{ _IMAGE_NAME }}:{{ _TAG }} \
-        .
+remove_builder:
+    {{ DOCKER }}  buildx rm --keep-state {{ BUILDER_NAME }}
 
-build_and_push_latest:
-    {{ _D }} buildx build \
-        -f {{ _DOCKERFILE }} \
-        --build-arg _JUST_VERSION={{ _JUST_VERSION }} \
-        --build-arg _WORKDIR={{ _WORKDIR }} \
-        --build-arg _BUILDER={{ _BUILDER }} \
-        --build-arg _RUNNER={{ _RUNNER }} \
+bake *OPTIONS: create_builder && remove_builder
+    {{ DOCKER }} buildx bake \
+        --builder {{ BUILDER_NAME }} \
         --pull \
-        --push \
-        --platform {{ _PLATFORM }} \
-        -t {{ _IMAGE_NAME }}:latest \
-        .
+        {{ OPTIONS }}
 
-update: create_builder
-    python update.py
+bake-push: (bake "--push")
+
+#  [example]
 
 demo:
-    docker pull m9810223/justfile
-    docker run --rm -it -v $(pwd):/jwd m9810223/justfile -lu
+    docker run --pull always --rm -it -v $(pwd):/jwd m9810223/justfile -lu
